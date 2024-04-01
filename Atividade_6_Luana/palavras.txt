@@ -1,0 +1,9 @@
+inserir faca
+inserir bola
+inserir garfo
+inserir ameixa
+inserir dado
+inserir hipopotamo
+inserir indio
+inserir casa
+mostrar

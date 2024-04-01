@@ -1,0 +1,7 @@
+inserir 99.2 01 9 Luana
+inserir 70.2 02 9 Artur
+inserir 80.2 03 6 Laura
+inserir 68.2 04 9 Lucas
+alunos
+aprovados
+reprovados

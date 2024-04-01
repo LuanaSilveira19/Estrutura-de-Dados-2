@@ -1,0 +1,10 @@
+---------------------------------------
+Alunos aprovados: 
+[Mat: 3, Nome: Laura, Méd: 6, Freq: 80.2]
+[Mat: 1, Nome: Luana, Méd: 9, Freq: 99.2]
+[Mat: 24, Nome: Gustavo, Méd: 6, Freq: 98.2]
+[Mat: 27, Nome: Gabriel, Méd: 8, Freq: 80.2]
+---------------------------------------
+Alunos reprovados: 
+[Mat: 2, Nome: Artur, Méd: 9, Freq: 70.2]
+[Mat: 4, Nome: Lucas, Méd: 9, Freq: 68.2]

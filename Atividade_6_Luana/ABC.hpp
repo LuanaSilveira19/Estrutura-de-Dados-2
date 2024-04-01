@@ -4,7 +4,7 @@
 #include <iomanip>
 typedef struct arv
 {
-    int info;
+    char info;
     arv *sae;
     arv *sad;
     int Alt;
@@ -56,7 +56,7 @@ void mostra_PosOrd(arvore *t)
     cout << ">";
 }
 
-bool busca_valor(arvore *t, int num)
+bool busca_valor(arvore *t, char num)
 {
 
     if(!testa_vazia(t))
@@ -71,7 +71,7 @@ bool busca_valor(arvore *t, int num)
     }
 }
 
-arvore *retorna_busca(arvore *t, int num)
+arvore *retorna_busca(arvore *t, char num)
 {
 
     if(!testa_vazia(t))
@@ -105,7 +105,7 @@ int FB(arvore *t)
     else
         return 0;
 }
-int nivel_no(arvore *t, int num, int nivel)
+int nivel_no(arvore *t, char num, int nivel)
 {
     if(!testa_vazia(t))
     {
@@ -201,7 +201,7 @@ arvore *balancear(arvore *t)
     return t;
 }
 
-void inserir(arvore **t, int num)
+void inserir(arvore **t, char num)
 {
     if(*t == NULL)
     {
@@ -229,7 +229,7 @@ void inserir(arvore **t, int num)
     // return t;
 }
 
-arvore* remover(arvore *t, int num)//com essa função diferente da do professor funcionou certo
+arvore* remover(arvore *t, char num)//com essa função diferente da do professor funcionou certo
 {
 
     if(t->info==num)
@@ -450,25 +450,27 @@ void arvore_genealogica(arvore *t, int num)
         cout<<"O pai do elemento é: "<<aux->info<<endl;
         if(aux->sae!=NULL && aux->sad != NULL)
         {
-            if(aux->sae->info != num){
+            if(aux->sae->info != num)
+            {
                 cout<<"O irmão do elemento é: "<<aux->sae->info<<endl;
                 if(aux->sae->sae!=NULL && aux->sae->sad!=NULL )
                     cout<<"Os sobrinhos desse elemento são: "<< aux->sae->sae->info<<", "<<aux->sae->sad->info<<endl;
                 else if(aux->sae->sae!=NULL)
-                     cout<<"O sobrinho desse elemento é: "<<aux->sae->sae->info<<endl;
+                    cout<<"O sobrinho desse elemento é: "<<aux->sae->sae->info<<endl;
                 else
-                     cout<<"O sobrinho desse elemento é: "<<aux->sae->sad->info<<endl;
+                    cout<<"O sobrinho desse elemento é: "<<aux->sae->sad->info<<endl;
 
             }
 
-            else{
-                 cout<<"O irmão do elemento é: "<<aux->sad->info<<endl;
-                 if(aux->sad->sae!=NULL && aux->sad->sad!=NULL )
+            else
+            {
+                cout<<"O irmão do elemento é: "<<aux->sad->info<<endl;
+                if(aux->sad->sae!=NULL && aux->sad->sad!=NULL )
                     cout<<"Os sobrinhos desse elemento são: "<< aux->sad->sae->info<<", "<<aux->sad->sad->info<<endl;
                 else if(aux->sad->sae!=NULL)
-                     cout<<"O sobrinho desse elemento é: "<<aux->sad->sae->info<<endl;
+                    cout<<"O sobrinho desse elemento é: "<<aux->sad->sae->info<<endl;
                 else
-                     cout<<"O sobrinho desse elemento é: "<<aux->sad->sad->info<<endl;
+                    cout<<"O sobrinho desse elemento é: "<<aux->sad->sad->info<<endl;
             }
 
         }
@@ -559,27 +561,63 @@ int total_nos2f(arvore *t)
         return total_nos2f(t->sae) + total_nos2f(t->sad)+1;
     else
         return total_nos2f(t->sae) + total_nos2f(t->sad);
-}
-
-void troca_arvore(arvore *t){
-    arvore *aux= t->sae;
-    t->sae=t->sad;
-    t->sad= aux;
-
-    imprimir(t,1);
 
 }
 
-bool verifica_morfica(arvore *t, arvore *t2){
-    if(t==NULL && t2==NULL)
-        return true;
-    if(t!=NULL && t2==NULL)
-        return false;
-    if(t2!=NULL && t==NULL)
-        return false;
-     return (verifica_morfica(t->sae,t2->sae) && verifica_morfica(t->sad,t2->sad));
+void mostra_caminho(arvore *t, char num)
+{
+    if(!testa_vazia(t))
+    {
+
+        if(t->info==num)
+            cout<<t->info;
+        else if(num>t->info)
+        {
+            cout<<t->info<<", ";
+            mostra_caminho(t->sad, num);
+        }
+        else if(num<t->info)
+        {
+            cout<<t->info<<", ";
+            mostra_caminho(t->sae, num);
+        }
+    }
 }
+
+void inserir2(arvore **t, char num)
+{
+    if(*t == NULL)
+    {
+        *t = new arvore;
+        (*t)->sae = NULL;
+        (*t)->sad = NULL;
+        (*t)->info = num;
+        (*t)->Alt = 0;
+
+    }
+
+    else
+    {
+        if(num < (*t)->info)
+            inserir(&(*t)->sae, num);
+        else
+            inserir(&(*t)->sad, num);
+
+    }
+}
+arvore *copia(arvore *a, arvore *b)
+{
+    if(!testa_vazia(a))
+    {
+        inserir2(&b,a->info);//tem que ter uma função sem o balanceamento pra fazer a copia
+        b=copia(a->sae,b);
+        b=copia(a->sad,b);
+    }
+    return b;
+}
+
 
 #endif
+
 
 
